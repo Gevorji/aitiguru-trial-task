@@ -1,7 +1,6 @@
-from dataclasses import Field
 from typing import Annotated
 
-from pydantic import StrictStr, IPvAnyAddress, PositiveInt, field_validator
+from pydantic import StrictStr, IPvAnyAddress, PositiveInt, field_validator, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
