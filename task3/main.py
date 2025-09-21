@@ -7,15 +7,16 @@ from task3.repositories import OrdersRepository
 from task3.settings import DbConnectionSettings
 from task3.routers import orders_router
 
+db_conn_settings = DbConnectionSettings()
 
 engine = create_async_engine(
     URL.create(
-        drivername=DbConnectionSettings.DRIVER,
-        host=DbConnectionSettings.HOST,
-        port=DbConnectionSettings.PORT,
-        username=DbConnectionSettings.USERNAME,
-        password=DbConnectionSettings.PASSWORD,
-        database=DbConnectionSettings.DB_NAME,
+        drivername=db_conn_settings.DRIVER,
+        host=db_conn_settings.HOST,
+        port=db_conn_settings.PORT,
+        username=db_conn_settings.USERNAME,
+        password=db_conn_settings.PASSWORD,
+        database=db_conn_settings.DB_NAME,
     )
 )
 
