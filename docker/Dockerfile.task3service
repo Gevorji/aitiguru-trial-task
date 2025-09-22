@@ -1,0 +1,33 @@
+FROM python:3.12-alpine
+
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    HOME=/home/srvapp \
+    POETRY_HOME=/opt/poetry \
+    POETRY_NO_INTERACTION=1
+
+ENV PATH="$POETRY_HOME/bin:$HOME/bin:$PATH"
+
+WORKDIR $HOME
+
+COPY pyproject.toml poetry.lock README.md ./
+
+
+RUN --mount=type=cache,target=/root/.cache/pip  pip install poetry
+
+RUN poetry env use python
+RUN poetry install --no-root
+
+COPY task3/ ./task3/
+
+COPY tests/test_data_fill_in.sql tests/insert_categories.sql ./
+
+RUN addgroup --system srvapp && adduser --system srvapp srvapp
+
+RUN chown -R srvapp:srvapp $HOME
+
+USER srvapp
+
+ENTRYPOINT ["poetry", "run", "uvicorn", "task3.main:app"]
+CMD ["--host", "0.0.0.0", "--port", "8000"]
