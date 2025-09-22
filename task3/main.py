@@ -11,7 +11,7 @@ db_conn_settings = DbConnectionSettings()
 
 engine = create_async_engine(
     URL.create(
-        drivername=db_conn_settings.DRIVER,
+        drivername=f'{db_conn_settings.DBMS}+{db_conn_settings.DRIVER}',
         host=db_conn_settings.HOST,
         port=db_conn_settings.PORT,
         username=db_conn_settings.USERNAME,
