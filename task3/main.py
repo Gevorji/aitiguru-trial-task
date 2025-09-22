@@ -24,7 +24,7 @@ sessionmaker = async_sessionmaker(engine, expire_on_commit=False)
 
 orders_repo = OrdersRepository(sessionmaker)
 
-deps.set_orders_repository(OrdersRepository)
+deps.set_orders_repository(orders_repo)
 
 app = FastAPI()
 app.include_router(orders_router, prefix="/orders")
