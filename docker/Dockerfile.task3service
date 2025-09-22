@@ -21,7 +21,7 @@ RUN poetry install --no-root
 
 COPY task3/ ./task3/
 
-COPY tests/test_data_fill_in.sql tests/insert_categories.sql ./
+COPY tests/test_data_fill_in.sql tests/insert_categories.sql init_db.sh ./
 
 RUN addgroup --system srvapp && adduser --system srvapp srvapp
 
